@@ -28,8 +28,14 @@ public class TableDesc {
 					String type=line[i].split(" ")[1];
 					String PRI=" ",isNull="YES",isAutoInc=" ";
 					if (line[i].toUpperCase().contains("NOT NULL")) isNull ="NO";
-					if (line[i].toUpperCase().contains("PRIMARY KEY")) PRI= "PRI";
-			        if (line[i].toUpperCase().contains("AUTO_INCREMENT")) isAutoInc = "auto_increment";
+					if (line[i].toUpperCase().contains("PRIMARY KEY")) {
+						PRI= "PRI";
+						isNull="NO";
+					}
+			        if (line[i].toUpperCase().contains("AUTO_INCREMENT")) {
+			        	isAutoInc = "auto_increment";
+			        	isNull="NO";
+			        }
 			        System.out.printf("%-15s | %-15s | %-6s | %-10s | %-12s |\n",
 			                column, // Field Name
 			                type, // Type

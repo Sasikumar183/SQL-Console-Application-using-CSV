@@ -95,7 +95,7 @@ public class InsertData {
             String colName = header.split(" ")[0];
             String constraint = header;
             if (constraint != null) {
-            	if (constraint.toUpperCase().contains("AUTO_INCREMENT")) {
+            	if (constraint.toUpperCase	().contains("AUTO_INCREMENT")) {
                     int maxId = 0;
                     for (String row : existingRows) {
                         String[] rowData = row.split(",");
@@ -138,7 +138,7 @@ public class InsertData {
                     }
                 }
 
-                if (constraint.toUpperCase().contains("NOT NULL")) {
+                if (constraint.toUpperCase().contains("NOT NULL")||constraint.toUpperCase().contains("PRIMARY KEY")) {
                     if (colValueMap.get(colName) == null || colValueMap.get(colName).isEmpty()) {
                         System.out.println("Error: Column '" + colName + "' cannot be NULL");
                         return;

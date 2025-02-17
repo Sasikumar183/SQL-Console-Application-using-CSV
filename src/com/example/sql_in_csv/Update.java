@@ -98,7 +98,7 @@ public class Update {
     }
 
     private static boolean validateConditions(String[] conditions, Map<String, Integer> columnIndices) {
-    	System.out.println(columnIndices);
+    	//System.out.println(columnIndices);
         for (String condition : conditions) {
 //        	System.out.println(condition);
             String operator = condition.contains("=") ? "=" : condition.contains("<") ? "<" : condition.contains(">") ? ">" : null;
@@ -144,7 +144,7 @@ public class Update {
             String column = parts[0].trim();
             String value = parts[1].trim();
             int colIndex = columnIndices.get(column);
-            System.out.println(tableData.get(0)[colIndex]);
+            //System.out.println(tableData.get(0)[colIndex]);
             if(tableData.get(0)[colIndex].toUpperCase().contains("NOT NULL")&& value.equalsIgnoreCase("null")){
             	System.out.println("Not Null Constraints Failed");
             	return -1;

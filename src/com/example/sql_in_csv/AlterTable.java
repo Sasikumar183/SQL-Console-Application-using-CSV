@@ -36,7 +36,7 @@ public class AlterTable {
             return;
         }
         for(int i=0;i<tableData.get(0).size();i++) {
-        	System.out.println(tableData.get(0).get(i).split(" ")[0]+" "+columnName.split(" ")[0]);
+        	//System.out.println(tableData.get(0).get(i).split(" ")[0]+" "+columnName.split(" ")[0]);
         	if(tableData.get(0).get(i).split(" ")[0].equals(columnName.split(" ")[0])) {
         		System.out.println("Column already exists.");
                 return;
@@ -45,6 +45,10 @@ public class AlterTable {
         
         if(columnName.toUpperCase().contains("NOT NULL") && tableData.size()>1) {
         	System.out.println("NOT NULL Column cannot be added to the table which has the data");
+        	return;
+        }
+        if(columnName.toUpperCase().contains("PRIMARY KEY") && tableData.size()>1) {
+        	System.out.println("PRIMARY KEY Column cannot be added to the table which has the data");
         	return;
         }
         tableData.get(0).add(columnName);
@@ -57,24 +61,35 @@ public class AlterTable {
     }
 
     private static void dropColumn(String filePath, String columnName) {
-    	System.out.println(columnName);
+    	//System.out.println(columnName);
     	
         List<List<String>> tableData = readCSV(filePath);
         if (tableData.isEmpty()) {
             System.out.println("Table not found.");
             return;
         }
-        System.out.println(tableData.get(0));
+        //System.out.println(tableData.get(0));
         List<String> tableHead=new ArrayList<>();
         for(int i=0;i<tableData.get(0).size();i++) {
         	tableHead.add(tableData.get(0).get(i).split(" ")[0]);
+        	if(tableData.get(0).get(i).split(" ")[0].equals(columnName)) {
+        		if(tableData.get(0).get(i).toUpperCase().contains("PRIMARY KEY")) {
+        			System.out.println("Primary key column cannot be dropped");
+        			return;
+        		}
+        		
+        	}
         	
         }
-
+        
         int colIndex = tableHead.indexOf(columnName);
         if (colIndex == -1) {
             System.out.println("Column not found.");
             return;
+        }
+        if(tableHead.size()==1) {
+        	System.out.println("No Other Columns Exist So won't drop the column");
+        	return;
         }
 
         for (List<String> row : tableData) {

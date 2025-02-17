@@ -36,7 +36,7 @@ public class DeleteData {
                 String[] row = line.split(",");
 
                 if (firstRow) {
-                    columns = row;  // Store column names
+                    columns = row;
                     rows.add(row);
                     firstRow = false;
                     continue;
